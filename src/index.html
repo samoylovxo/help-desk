@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HelpDesk</title>
+  </head>
+  <body>
+    <div class="desk">
+      <div class="desk__content">
+        <button class="btn add-ticket-btn">Добавить тикет</button>
+
+        <div class="desk__ticket-row">
+          <!-- <div class="desk__ticket">
+            <div class="desk__ticket-content">
+              <input type="checkbox" class="desk__ticket-checkbox" />
+              <h2 class="desk__ticket-title">Title</h2>
+              <div class="desk__ticket-datetime">
+                <span class="desk__ticket-date">22.06.2001</span>
+                <span class="desk__ticket-time">16:45</span>
+              </div>
+              <div class="desk__ticket-actions">
+                <button class="btn desk__ticket-edit">Edit</button
+                ><button class="btn desk__ticket-delete">Х</button>
+              </div>
+            </div>
+            <div class="desk__ticket-desc">asasdasd</div>
+          </div> -->
+        </div>
+
+        <div class="desk__modal-row">
+          <div class="desk__modal-add">
+            <div class="desk__modal-content">
+              <h2 class="desk__modal-title"></h2>
+              <form class="desk__from">
+                <label for="name">Краткое описание</label>
+                <input
+                  class="desk__input-name"
+                  name="name"
+                  id="name"
+                  type="text"
+                />
+                <label for="description">Подробное описание</label>
+                <textarea
+                  class="desk__input-desc"
+                  name="description"
+                  id="description"
+                ></textarea>
+                <div class="desk__modal-btns">
+                  <button type="button" class="btn btn-close">Отмена</button
+                  ><button type="submit" class="btn">Ок</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="desk__modal-delete">
+            <div class="desk__modal-content">
+              <h2>Удалить тикет?</h2>
+              <p class="desk__modal-text">
+                Вы уверены, что хотите удалить этот тикет? Это действие
+                необратимо.
+              </p>
+              <div class="desk__modal-btns">
+                <button class="btn btn-close">Отмена</button>
+                <button class="btn btn-ok">Ок</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

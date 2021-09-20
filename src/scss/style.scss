@@ -1,0 +1,160 @@
+@import './styleHelpers.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+body {
+  color: $MainColor;
+  font-family: Calibri, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  padding: 10px 14px;
+}
+
+.desk {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  &__content {
+    padding: 14px;
+  }
+
+  &__ticket-row {
+    margin-top: 24px;
+  }
+
+  &__ticket {
+    padding: 8px 10px;
+    border: 1px solid $Color3;
+    border-radius: 4px;
+  }
+
+  &__ticket-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__ticket-title {
+    margin: 0;
+  }
+
+  &__ticket-desc {
+    margin-top: 20px;
+  }
+
+  &__ticket-checkbox {
+    position: relative;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+    margin-left: 10px;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      background-image: url('../images/unchecked.svg');
+      background-size: 14px;
+    }
+
+    &:checked::before {
+      background-image: url('../images/checked.svg');
+    }
+  }
+
+  &__modal-add,
+  &__modal-delete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #26262657;
+
+    display: none;
+  }
+
+  &__modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 14px 24px;
+    border-radius: 4px;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  &__input-name {
+    margin-bottom: 14px;
+  }
+
+  &__modal-btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.btn {
+  padding: 8px 20px;
+  border: 1px solid $Color2;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+
+  &.add-ticket-btn {
+    margin-left: auto;
+    display: block;
+  }
+
+  &.desk__ticket-edit,
+  &.desk__ticket-delete {
+    border: 1px solid $Color3;
+    padding: 4px 8px;
+  }
+
+  &.desk__ticket-edit {
+    margin-right: 10px;
+  }
+
+  &.btn-close {
+    margin-right: 20px;
+  }
+
+  &.btn-ok {
+    font-weight: 700;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
