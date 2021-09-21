@@ -4,6 +4,7 @@
   "description": "starting frontend developer config with all the required dependencies",
   "private": true,
   "scripts": {
+    "prestart": "npm install",
     "startDevServer": "cross-env NODE_ENV=development webpack serve --mode development",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
