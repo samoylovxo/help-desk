@@ -4,11 +4,10 @@
   "description": "starting frontend developer config with all the required dependencies",
   "private": true,
   "scripts": {
-    "prestart": "npm install",
-    "startDevServer": "cross-env NODE_ENV=development webpack serve --mode development",
+    "start": "cross-env NODE_ENV=development webpack serve --mode development",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
-    "start": "nodemon ./server/server.js",
+    "server": "nodemon ./server/server.js",
     "lint": "eslint .",
     "test": "jest --testPathPattern=./__tests__/",
     "e2e": "jest --testPathPattern=./e2e/ --runInBand",
