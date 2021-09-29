@@ -11,6 +11,7 @@ export class Desk {
     }
     this.api = new Api(url);
     this.ticket = null;
+    this.isEditTicket = null;
 
     // Elements
     this.ticketRow = this.element.querySelector('.desk__ticket-row');
@@ -33,7 +34,6 @@ export class Desk {
     this.createTicket = this.createTicket.bind(this);
     this.getDescription = this.getDescription.bind(this);
     this.showDescription = this.showDescription.bind(this);
-    // this.rowActions = this.rowActions.bind(this);
 
     // Listeners
     this.addTicketBtn.addEventListener('click', this.showModal);
@@ -44,7 +44,6 @@ export class Desk {
     this.ticketRow.addEventListener('click', this.getDescription);
     this.ticketRow.addEventListener('click', this.showDescription);
     this.ticketRow.addEventListener('click', this.showModal);
-    // this.ticketRow.addEventListener('click', this.rowActions);
 
     // Start app
     this.init();
@@ -114,6 +113,8 @@ export class Desk {
     if (target.classList.contains('desk__ticket-edit')) {
       const ticket = target.closest('.desk__ticket');
 
+      this.isEditTicket = ticket;
+
       this.api
         .getTicketById(ticket.dataset.id)
         .then((response) => response.json())
@@ -143,6 +144,27 @@ export class Desk {
       name: this.inputName.value,
       description: this.inputDesc.value,
     };
+
+    if (this.isEditTicket) {
+      const title = this.isEditTicket.querySelector('.desk__ticket-title');
+      const desc = this.isEditTicket.querySelector('.desk__ticket-desc');
+
+      this.api
+        .editTicket(this.isEditTicket.dataset.id, query)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status && title && desc) {
+            title.innerText = this.inputName.value;
+            desc.innerText = this.inputDesc.value;
+          }
+        });
+
+      this.modalAdd.classList.remove('show');
+
+      this.isEditTicket = null;
+
+      return;
+    }
 
     await this.api.createTicket(query);
 

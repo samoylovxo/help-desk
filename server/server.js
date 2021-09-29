@@ -16,6 +16,8 @@ app.use(async (ctx) => {
   const id = uuid.v4();
   const date = new Date();
 
+  const findTicket = query.id && db.ticketsFull.find((t) => t.id === query.id);
+
   switch (query.method) {
     case 'allTickets':
       ctx.response.body = db.tickets;
@@ -46,22 +48,23 @@ app.use(async (ctx) => {
 
       return;
     case 'ticketById':
-      ctx.body = db.ticketsFull.find((t) => t.id === query.id)
+      ctx.body = findTicket
         ? {
             status: true,
-            ticket: db.ticketsFull.find((t) => t.id === query.id),
+            ticket: findTicket,
           }
         : { status: false };
       return;
     case 'removeTicket':
-      db.tickets.splice(
-        db.ticketsFull.findIndex((t) => t.id === query.id),
-        1
-      );
-      db.ticketsFull.splice(
-        db.ticketsFull.findIndex((t) => t.id === query.id),
-        1
-      );
+      db.tickets.splice(findTicket, 1);
+      db.ticketsFull.splice(findTicket, 1);
+
+      ctx.body = { status: true };
+
+      return;
+    case 'editTicket':
+      findTicket.name = query.name;
+      findTicket.description = query.description;
 
       ctx.body = { status: true };
 

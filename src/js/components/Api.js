@@ -35,4 +35,14 @@ export class Api {
       headers: this.contentTypeHeader,
     });
   }
+
+  editTicket(id, query) {
+    return fetch(
+      `${this.url}?method=editTicket&name=${query.name}&description=${query.description}&id=${id}`,
+      {
+        method: 'PUT',
+        headers: this.contentTypeHeader,
+      }
+    );
+  }
 }
