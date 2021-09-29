@@ -58,7 +58,6 @@ export class Desk {
           this.ticketRow.innerHTML =
             '<h2>Тикетов пока нет, добавьте новый</h2>';
         } else {
-          this.ticketRow.innerHTML = '';
           this.renderTickets();
         }
       });
@@ -77,6 +76,8 @@ export class Desk {
   async renderTickets() {
     const response = await this.api.getAllTickets();
     const data = await response.json();
+
+    this.ticketRow.innerHTML = '';
 
     data.forEach((ticketData) => {
       this.ticket = `<div class="desk__ticket" data-id="${ticketData.id}">

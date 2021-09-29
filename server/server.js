@@ -17,6 +17,8 @@ app.use(async (ctx) => {
   const date = new Date();
 
   const findTicket = query.id && db.ticketsFull.find((t) => t.id === query.id);
+  const findTicketIndex =
+    query.id && db.ticketsFull.findIndex((t) => t.id === query.id);
 
   switch (query.method) {
     case 'allTickets':
@@ -56,17 +58,28 @@ app.use(async (ctx) => {
         : { status: false };
       return;
     case 'removeTicket':
-      db.tickets.splice(findTicket, 1);
-      db.ticketsFull.splice(findTicket, 1);
+      if (findTicketIndex !== -1) {
+        db.tickets.splice(findTicketIndex, 1);
+        db.ticketsFull.splice(findTicketIndex, 1);
 
-      ctx.body = { status: true };
+        ctx.body = { status: true };
+      } else {
+        ctx.body = { status: false };
+      }
 
       return;
     case 'editTicket':
       findTicket.name = query.name;
       findTicket.description = query.description;
 
-      ctx.body = { status: true };
+      if (findTicketIndex !== -1) {
+        db.tickets[findTicketIndex] = findTicket;
+        db.ticketsFull[findTicketIndex] = findTicket;
+
+        ctx.body = { status: true };
+      } else {
+        ctx.body = { status: false };
+      }
 
       return;
     default:
